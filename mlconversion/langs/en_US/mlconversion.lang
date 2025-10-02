@@ -1,0 +1,101 @@
+# Copyright (C) 2024 ML Conversion Module
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+#
+# Generic
+#
+
+# Module label 'ModuleMLConversionName'
+ModuleMLConversionName = Rezk Parfumery Lab
+ModuleRezkParfumeryLabName = Rezk Parfumery Lab
+# Module description 'ModuleMLConversionDesc'
+ModuleMLConversionDesc = Rezk Parfumery Lab - Complete perfume manufacturing and stock management system
+ModuleRezkParfumeryLabDesc = Rezk Parfumery Lab - Complete perfume manufacturing and stock management system
+
+#
+# Admin page
+#
+MLConversionSetup = ML Conversion Setup
+MLConversionSetupPage = ML Conversion setup page
+Settings = Settings
+MLConversionSetupPage = Setup page for ML Conversion module
+
+#
+# About page
+#
+About = About
+MLConversionAbout = About ML Conversion
+MLConversionAboutPage = ML Conversion about page
+
+#
+# Sample page
+#
+MLConversionArea = ML Conversion Area
+MyPageName = My page name
+
+#
+# Sample widget
+#
+MyWidget = My widget
+MyWidgetDescription = My widget description
+
+#
+# Main Features
+#
+WelcomeToMLConversion = Welcome to ML Conversion System
+MLCalculator = ML to Bottle Calculator
+InteractiveDemo = Interactive Oil Selection Demo
+NewManufacturingOrder = New Manufacturing Order
+OpenCalculator = Open Calculator
+TryDemo = Try Interactive Demo
+
+#
+# Features Description
+#
+MLConversionFeatures = ML Conversion Features
+InteractiveOilSelection = Interactive Oil Selection
+AutomaticallyDetectsOilProducts = Automatically detects your oil products and shows real-time stock levels
+RealTimeStockLevels = Real-time stock levels and production capacity
+ProductionCapacityCalculation = Production capacity calculation
+SmartStockAlerts = Smart stock alerts and reorder points
+
+MLToBottleConversion = ML to Bottle Conversion
+AutomaticConversionBetweenML = Automatic conversion between milliliters and bottle quantities
+ExampleConversion = Example: 300ml oil → 2×125ml bottles + 50ml remaining
+MultiSizeBottleSupport = Multi-size bottle support (20ml, 30ml, 50ml, 125ml, etc.)
+RealTimeCalculations = Real-time calculations as you type
+
+ManufacturingOrders = Manufacturing Orders
+CompleteProductionPlanning = Complete production planning with material requirements
+MultiSizeProduction = Multi-size production from single base formula
+MaterialRequirementPlanning = Material requirement planning and feasibility analysis
+FeasibilityAnalysis = Feasibility analysis with stock checking
+
+#
+# Configuration
+#
+MLCONVERSION_DEFAULT_FORMULA_OUTPUT = Default Formula Output (ML)
+MLCONVERSION_DEFAULT_FORMULA_OUTPUTTooltip = Default output in milliliters for base formula (oil + alcohol)
+MLCONVERSION_DEFAULT_OIL_PER_BATCH = Default Oil per Batch (ML)
+MLCONVERSION_DEFAULT_OIL_PER_BATCHTooltip = Default oil quantity per batch in milliliters
+MLCONVERSION_DEFAULT_ALCOHOL_PER_BATCH = Default Alcohol per Batch (ML)
+MLCONVERSION_DEFAULT_ALCOHOL_PER_BATCHTooltip = Default alcohol quantity per batch in milliliters
+
+#
+# Permissions
+#
+Permission900001 = Read ML Conversion
+Permission900002 = Create/Update ML Conversion
+Permission900003 = Delete ML Conversion

@@ -1,0 +1,639 @@
+/* Modern Mobile TakePos CSS */
+/* Optimized for touch devices and mobile screens */
+
+:root {
+    /* Mobile-specific variables */
+    --mobile-header-height: 60px;
+    --mobile-tab-height: 50px;
+    --mobile-button-height: 48px;
+    --mobile-touch-target: 44px;
+    --mobile-spacing: 12px;
+    --mobile-border-radius: 12px;
+    
+    /* Touch feedback */
+    --touch-scale: 0.95;
+    --touch-opacity: 0.7;
+}
+
+/* Mobile-first responsive design */
+@media (max-width: 768px) {
+    .modern-pos-container {
+        grid-template-rows: var(--mobile-header-height) var(--mobile-tab-height) 1fr;
+    }
+    
+    .modern-pos-header {
+        height: var(--mobile-header-height);
+        padding: var(--spacing-sm) var(--mobile-spacing);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: var(--bg-primary);
+        border-bottom: 1px solid var(--border-light);
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .modern-pos-header-left,
+    .modern-pos-header-right {
+        display: none;
+    }
+    
+    .modern-pos-header-center {
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .modern-search-input {
+        font-size: 16px; /* Prevent zoom on iOS */
+        height: var(--mobile-button-height);
+    }
+    
+    /* Mobile navigation tabs */
+    .modern-mobile-tabs {
+        display: flex;
+        background: var(--bg-primary);
+        border-bottom: 1px solid var(--border-light);
+        position: fixed;
+        top: var(--mobile-header-height);
+        left: 0;
+        right: 0;
+        z-index: 999;
+        height: var(--mobile-tab-height);
+    }
+    
+    .modern-mobile-tab {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
+        font-weight: 500;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        min-height: var(--mobile-touch-target);
+        position: relative;
+    }
+    
+    .modern-mobile-tab.active {
+        color: var(--primary-color);
+    }
+    
+    .modern-mobile-tab.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--primary-color);
+    }
+    
+    .modern-mobile-tab:active {
+        transform: scale(var(--touch-scale));
+        opacity: var(--touch-opacity);
+    }
+    
+    /* Mobile main content */
+    .modern-pos-main {
+        margin-top: calc(var(--mobile-header-height) + var(--mobile-tab-height));
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        gap: 0;
+        padding: 0;
+        height: calc(100vh - var(--mobile-header-height) - var(--mobile-tab-height));
+    }
+    
+    /* Mobile panels */
+    .modern-mobile-panel {
+        display: none;
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .modern-mobile-panel.active {
+        display: block;
+    }
+    
+    /* Products panel for mobile */
+    .modern-mobile-products {
+        padding: var(--mobile-spacing);
+    }
+    
+    .modern-categories-nav {
+        display: flex;
+        gap: var(--spacing-sm);
+        margin-bottom: var(--mobile-spacing);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding-bottom: var(--spacing-sm);
+    }
+    
+    .modern-categories-nav::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .modern-category-btn {
+        min-width: 80px;
+        height: 36px;
+        padding: var(--spacing-xs) var(--spacing-md);
+        font-size: var(--font-size-sm);
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .modern-products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: var(--mobile-spacing);
+    }
+    
+    .modern-product-card {
+        padding: var(--mobile-spacing);
+        border-radius: var(--mobile-border-radius);
+        min-height: var(--mobile-touch-target);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .modern-product-card:active {
+        transform: scale(var(--touch-scale));
+    }
+    
+    .modern-product-image {
+        height: 100px;
+        border-radius: var(--radius-md);
+    }
+    
+    .modern-product-name {
+        font-size: var(--font-size-sm);
+        line-height: 1.3;
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .modern-product-price {
+        font-size: var(--font-size-base);
+        font-weight: 700;
+    }
+    
+    /* Invoice panel for mobile */
+    .modern-mobile-invoice {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        background: var(--bg-primary);
+    }
+    
+    .modern-invoice-header {
+        padding: var(--mobile-spacing);
+        border-bottom: 1px solid var(--border-light);
+        flex-shrink: 0;
+    }
+    
+    .modern-customer-info {
+        margin-bottom: var(--mobile-spacing);
+    }
+    
+    .modern-customer-btn {
+        width: 100%;
+        justify-content: center;
+        min-height: var(--mobile-button-height);
+        font-size: var(--font-size-base);
+    }
+    
+    .modern-invoice-total {
+        text-align: center;
+        padding: var(--mobile-spacing);
+        background: var(--bg-tertiary);
+        border-radius: var(--mobile-border-radius);
+    }
+    
+    .modern-total-amount {
+        font-size: var(--font-size-4xl);
+        font-weight: 700;
+    }
+    
+    .modern-invoice-lines {
+        flex: 1;
+        padding: var(--mobile-spacing);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .modern-invoice-line {
+        padding: var(--mobile-spacing);
+        margin-bottom: var(--spacing-sm);
+        border-radius: var(--mobile-border-radius);
+        min-height: var(--mobile-touch-target);
+        border: 2px solid transparent;
+    }
+    
+    .modern-invoice-line:active {
+        transform: scale(0.98);
+    }
+    
+    .modern-invoice-line.selected {
+        border-color: var(--primary-color);
+        background: rgb(37 99 235 / 0.05);
+    }
+    
+    .modern-line-qty {
+        min-width: 32px;
+        height: 24px;
+        font-size: var(--font-size-sm);
+    }
+    
+    .modern-line-price {
+        font-size: var(--font-size-lg);
+        font-weight: 700;
+    }
+    
+    /* Actions panel for mobile */
+    .modern-mobile-actions {
+        padding: var(--mobile-spacing);
+        background: var(--bg-primary);
+    }
+    
+    .modern-numpad {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--mobile-spacing);
+        margin-bottom: var(--mobile-spacing);
+    }
+    
+    .modern-numpad-btn {
+        height: 60px;
+        font-size: var(--font-size-xl);
+        border-radius: var(--mobile-border-radius);
+        min-height: var(--mobile-touch-target);
+    }
+    
+    .modern-numpad-btn:active {
+        transform: scale(var(--touch-scale));
+    }
+    
+    .modern-action-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--mobile-spacing);
+    }
+    
+    .modern-action-btn {
+        height: var(--mobile-button-height);
+        font-size: var(--font-size-base);
+        border-radius: var(--mobile-border-radius);
+        min-height: var(--mobile-touch-target);
+    }
+    
+    .modern-action-btn:active {
+        transform: scale(var(--touch-scale));
+    }
+    
+    .modern-action-btn.full-width {
+        grid-column: 1 / -1;
+    }
+    
+    /* Mobile-specific utilities */
+    .mobile-only {
+        display: block;
+    }
+    
+    .desktop-only {
+        display: none;
+    }
+    
+    /* Swipe gestures support */
+    .swipe-container {
+        touch-action: pan-x;
+        overflow-x: hidden;
+    }
+    
+    /* Pull to refresh */
+    .pull-to-refresh {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .pull-to-refresh-indicator {
+        position: absolute;
+        top: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-primary);
+        border-radius: 50%;
+        box-shadow: var(--shadow-md);
+        transition: all var(--transition-normal);
+    }
+    
+    .pull-to-refresh.pulling .pull-to-refresh-indicator {
+        top: 10px;
+    }
+    
+    /* Mobile modal adjustments */
+    .modal-content {
+        margin: 5% auto;
+        width: 95%;
+        max-width: none;
+        border-radius: var(--mobile-border-radius);
+    }
+    
+    .modal-body {
+        padding: var(--mobile-spacing);
+    }
+    
+    .modal-body button {
+        width: 100%;
+        margin-bottom: var(--spacing-sm);
+        min-height: var(--mobile-button-height);
+    }
+    
+    /* Improved touch targets */
+    .touch-target {
+        min-height: var(--mobile-touch-target);
+        min-width: var(--mobile-touch-target);
+    }
+    
+    /* Loading states for mobile */
+    .mobile-loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: var(--spacing-2xl);
+        color: var(--text-secondary);
+    }
+    
+    .mobile-loading-spinner {
+        width: 32px;
+        height: 32px;
+        border: 3px solid var(--border-light);
+        border-top-color: var(--primary-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: var(--mobile-spacing);
+    }
+    
+    /* Mobile feedback */
+    .modern-feedback {
+        top: calc(var(--mobile-header-height) + 10px);
+        right: 10px;
+        left: 10px;
+        max-width: none;
+        border-radius: var(--mobile-border-radius);
+    }
+    
+    /* Accessibility improvements */
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    
+    /* Focus styles for keyboard navigation */
+    .modern-product-card:focus,
+    .modern-action-btn:focus,
+    .modern-numpad-btn:focus,
+    .modern-category-btn:focus {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
+    }
+    
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+        :root {
+            --border-light: #000000;
+            --border-medium: #000000;
+            --text-secondary: #000000;
+        }
+        
+        .modern-product-card,
+        .modern-action-btn,
+        .modern-numpad-btn {
+            border: 2px solid currentColor;
+        }
+    }
+    
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+    
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg-primary: #1e293b;
+            --bg-secondary: #0f172a;
+            --bg-tertiary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --border-light: #334155;
+            --border-medium: #475569;
+        }
+        
+        .modern-pos-header {
+            background: var(--bg-primary);
+            border-bottom-color: var(--border-light);
+        }
+        
+        .modern-search-input {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-color: var(--border-medium);
+        }
+        
+        .modern-search-input::placeholder {
+            color: var(--text-muted);
+        }
+    }
+}
+
+/* Extra small devices (phones in portrait) */
+@media (max-width: 480px) {
+    .modern-products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: var(--spacing-sm);
+    }
+    
+    .modern-product-image {
+        height: 80px;
+    }
+    
+    .modern-numpad {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .modern-numpad-btn {
+        height: 50px;
+        font-size: var(--font-size-lg);
+    }
+    
+    .modern-action-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .modern-total-amount {
+        font-size: var(--font-size-3xl);
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+    .modern-pos-main {
+        grid-template-columns: 1fr 300px;
+        grid-template-rows: 1fr;
+    }
+    
+    .modern-mobile-products {
+        order: 1;
+    }
+    
+    .modern-mobile-invoice {
+        order: 2;
+        border-left: 1px solid var(--border-light);
+    }
+    
+    .modern-mobile-actions {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 300px;
+        background: var(--bg-primary);
+        border-top: 1px solid var(--border-light);
+        z-index: 100;
+    }
+    
+    .modern-mobile-products {
+        padding-bottom: 120px; /* Space for actions panel */
+    }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    .modern-pos-container {
+        height: -webkit-fill-available;
+    }
+    
+    .modern-search-input {
+        font-size: 16px; /* Prevent zoom */
+    }
+    
+    /* Fix for iOS Safari bottom safe area */
+    .modern-mobile-actions {
+        padding-bottom: calc(var(--mobile-spacing) + env(safe-area-inset-bottom));
+    }
+}
+
+/* Android Chrome specific fixes */
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+    .modern-search-input {
+        font-size: 16px; /* Prevent zoom */
+    }
+}
+
+/* Tablet specific adjustments */
+@media (min-width: 481px) and (max-width: 768px) {
+    .modern-products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+    
+    .modern-product-image {
+        height: 120px;
+    }
+    
+    .modern-numpad {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 300px;
+        margin: 0 auto var(--mobile-spacing);
+    }
+    
+    .modern-action-buttons {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+/* Animation keyframes */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Utility classes for mobile */
+.fade-in-up {
+    animation: fadeInUp 0.3s ease-out;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.3s ease-out;
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+.no-scroll {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
+.safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-top {
+    padding-top: env(safe-area-inset-top);
+}

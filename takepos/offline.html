@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>TakePos - Offline</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --border-light: #e2e8f0;
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --radius-lg: 0.75rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .offline-container {
+            text-align: center;
+            padding: var(--spacing-xl);
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        .offline-icon {
+            font-size: 4rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .offline-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+        }
+        
+        .offline-message {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xl);
+            line-height: 1.6;
+        }
+        
+        .retry-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .retry-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+        
+        .retry-button:active {
+            transform: translateY(0);
+        }
+        
+        .connection-status {
+            margin-top: var(--spacing-lg);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .connection-status.offline {
+            background: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        
+        .connection-status.online {
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .offline-container {
+                padding: var(--spacing-lg);
+            }
+            
+            .offline-icon {
+                font-size: 3rem;
+            }
+            
+            .offline-title {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container fade-in">
+        <div class="offline-icon pulse">📱</div>
+        <h1 class="offline-title">You're Offline</h1>
+        <p class="offline-message">
+            TakePos needs an internet connection to work properly. 
+            Please check your connection and try again.
+        </p>
+        
+        <button class="retry-button" onclick="retryConnection()">
+            <span id="retry-icon">🔄</span>
+            <span id="retry-text">Retry Connection</span>
+        </button>
+        
+        <div class="connection-status offline" id="connectionStatus">
+            <span>🔴</span> No internet connection
+        </div>
+    </div>
+
+    <script>
+        let isRetrying = false;
+        
+        function retryConnection() {
+            if (isRetrying) return;
+            
+            isRetrying = true;
+            const retryButton = document.querySelector('.retry-button');
+            const retryIcon = document.getElementById('retry-icon');
+            const retryText = document.getElementById('retry-text');
+            
+            // Update button state
+            retryButton.style.opacity = '0.7';
+            retryButton.style.cursor = 'not-allowed';
+            retryIcon.textContent = '⏳';
+            retryText.textContent = 'Checking...';
+            
+            // Try to reload the page
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        }
+        
+        function updateConnectionStatus() {
+            const statusElement = document.getElementById('connectionStatus');
+            
+            if (navigator.onLine) {
+                statusElement.className = 'connection-status online';
+                statusElement.innerHTML = '<span>🟢</span> Connected - Redirecting...';
+                
+                // Redirect to main app when online
+                setTimeout(() => {
+                    window.location.href = '/takepos/modern-index.php';
+                }, 1500);
+            } else {
+                statusElement.className = 'connection-status offline';
+                statusElement.innerHTML = '<span>🔴</span> No internet connection';
+            }
+        }
+        
+        // Listen for online/offline events
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+        
+        // Check connection status on load
+        updateConnectionStatus();
+        
+        // Periodically check connection
+        setInterval(() => {
+            if (navigator.onLine) {
+                updateConnectionStatus();
+            }
+        }, 5000);
+        
+        // Handle service worker updates
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.addEventListener('message', (event) => {
+                if (event.data && event.data.type === 'CACHE_UPDATED') {
+                    // Show update available message
+                    const updateBanner = document.createElement('div');
+                    updateBanner.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: var(--primary-color);
+                        color: white;
+                        padding: 12px 24px;
+                        border-radius: 8px;
+                        font-size: 14px;
+                        z-index: 1000;
+                        box-shadow: var(--shadow-md);
+                    `;
+                    updateBanner.textContent = 'App updated! Refresh to get the latest version.';
+                    document.body.appendChild(updateBanner);
+                    
+                    // Auto-remove after 5 seconds
+                    setTimeout(() => {
+                        updateBanner.remove();
+                    }, 5000);
+                }
+            });
+        }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                retryConnection();
+            }
+            
+            if (e.key === 'Escape') {
+                // Try to go back to previous page
+                if (window.history.length > 1) {
+                    window.history.back();
+                }
+            }
+        });
+        
+        // Add some visual feedback for touch devices
+        document.querySelector('.retry-button').addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
+        });
+        
+        document.querySelector('.retry-button').addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+        });
+        
+        // Prevent zoom on double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>
